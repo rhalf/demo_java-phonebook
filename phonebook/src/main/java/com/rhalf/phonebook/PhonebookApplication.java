@@ -1,26 +1,37 @@
 package com.rhalf.phonebook;
 
-import lombok.extern.slf4j.Slf4j;
+import com.rhalf.phonebook.model.Contact;
+import com.rhalf.phonebook.service.ContactService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 
 @SpringBootApplication
-@Slf4j
-public class PhonebookApplication implements  CommandLineRunner{
+public class PhonebookApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PhonebookApplication.class, args);
 	}
 
+	@Autowired
+	private ContactService contactService;
+
 	@Override
 	public void run(String... args) throws Exception {
-		log.info("CommandLinner: starts =================================");
-
-
-		log.info("CommandLinner: ends =================================");
+		contactService.save(new Contact(
+				null,
+				"rhalf",
+				"09176088771",
+				"rhalfcaacbay@gmail.com",
+				true
+		));
+		contactService.save(new Contact(
+				null,
+				"mark",
+				"091760123123",
+				"mark@lapu.com",
+				true
+		));
 	}
 }
